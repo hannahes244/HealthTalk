@@ -1,14 +1,23 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Send } from 'lucide-react';
 
 export default function ChatInput({ onSendMessage, isLoading }) {
   const [message, setMessage] = useState('');
   const textareaRef = useRef(null);
 
   const handleSubmit = (e) => {
+    e.preventDefault();
+    if (message.trim() && !isLoading) {
+      onSendMessage(message.trim());
+      setMessage('');
+    }
   };
 
   const handleKeyPress = (e) => {
-
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSubmit(e);
+    }
   };
 
   return (
@@ -18,19 +27,21 @@ export default function ChatInput({ onSendMessage, isLoading }) {
           <textarea
             ref={textareaRef}
             value={message}
-            onKeyPress={handleKeyPress}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={handleKeyPress}
             placeholder="Describe your symptoms or ask a health question..."
             className="chat-input-field"
           />
         </div>
         
         <button type="submit" className="chat-send-btn">
+        <Send size={20} />
         </button>
       </form>
       
-      <div className="chat-disclaimer">
+      {/* <div className="chat-disclaimer">
         This chatbot provides general health information only. Always consult healthcare professionals for medical advice.
-      </div>
+      </div> */}
     </div>
   );
 }

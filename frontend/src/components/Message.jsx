@@ -14,7 +14,7 @@ export default function Message({ message }) {
       <div className="message-content">
         <div className="message-header">
           <span className="message-sender">
-            {isBot ? 'MedAssist' : 'You'}
+            {isBot ? 'HeathTalk' : 'You'}
           </span>
           <span className="message-time">
             {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
