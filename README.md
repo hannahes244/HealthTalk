@@ -10,16 +10,6 @@ People can delay seeking care because of cost, limited access, uncertainty, or d
 
 ## How it works
 
-```mermaid
-flowchart LR
-    U[User describes symptoms] --> F[React chat interface]
-    F --> A[FastAPI API]
-    A --> L[OpenAI symptom extraction]
-    L --> I[Infermedica assessment]
-    I --> G[OpenAI guidance summary]
-    G --> F
-```
-
 1. The assistant gathers the user’s age, sex, and free-text symptom description.
 2. OpenAI maps the description to approved Infermedica symptom terms.
 3. Infermedica returns an initial condition assessment from the supplied evidence.
